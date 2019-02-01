@@ -1,0 +1,17 @@
+<!DOCTYPE html>
+<html>
+<head>
+<meta charset="UTF-8">
+<title>Page test.jsp</title>
+</head>
+<body>
+
+<h1>page test.jsp</h1>
+<p>Resultat : ${4*3}</p>
+<p>Chaine : ${ chaine }</p>
+<p>Chaine : ${ empty chaine2 ? "Vide" : chaine2 }</p>
+<p>Qlles valeurs : ${ ints[0]} <br> ${ ints[3]} <br>${ ints[5]}</p>
+
+
+</body>
+</html>

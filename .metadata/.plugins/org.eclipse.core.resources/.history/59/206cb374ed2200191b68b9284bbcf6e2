@@ -1,0 +1,18 @@
+<%@page import ="site_cours.dao.ServiceDAO" %>
+<%@page import ="site_cours.models.Service" %>
+<%@page language="java" pageEncoding="UTF-8"%>
+<aside>
+	<nav>
+		<ul>
+			<%
+				ServiceDAO servDao = new ServiceDAO();
+				for(Service service :servDao.getAllServices()){
+					out.print("<li><a href='/accueil'>"+ service.getLibelle()+"</a></li>");
+				}
+			%>
+		</ul>
+	</nav>
+</aside>
+
+        
+      

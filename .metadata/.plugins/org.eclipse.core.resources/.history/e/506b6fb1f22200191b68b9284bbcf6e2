@@ -1,0 +1,71 @@
+package site_cours.dao;
+
+import java.sql.Connection;
+import java.sql.DriverManager;
+import java.sql.ResultSet;
+import java.sql.SQLException;
+import java.sql.Statement;
+import java.util.ArrayList;
+
+import site_cours.models.Employes;
+import site_cours.models.Service;
+
+public class ServiceDAO {
+
+	public ArrayList<Service> getAllServices(){
+		
+		ArrayList<Service> alServ = new ArrayList<Service>();
+		ArrayList<Employes> alEmp = new ArrayList<Employes>();
+		
+		// -- Init driver --
+ 		// CLique droit sur le projet > Build Path > C://programmeFiles (x64) > Mysql > connector J8
+ 		try {
+			Class.forName("com.mysql.cj.jdbc.Driver");
+		} catch (ClassNotFoundException e) {
+			e.printStackTrace();
+			System.out.println("Erreur de chargement du pilote 'cj.jdbc'");
+		}
+ 		System.out.println("Chargement pilote OK");
+ 		
+ 		// -- Init/Recupere connexion --
+ 		Connection cnx = null;
+ 		try {
+			cnx = DriverManager.getConnection("jdbc:mysql://localhost:3306/gestionEmp?zeroDateTimeBehavior=CONVERT_TO_NULL&serverTimezone=UTC", "root", "root");
+		} catch (SQLException e) {
+			e.printStackTrace();
+			System.out.println("Erreur de connexion à la base");
+		}
+ 		System.out.println("Connexion OK\n");
+ 		
+ 		
+ 		try {
+ 			Statement stmt = cnx.createStatement();
+ 			ResultSet rsServ = stmt.executeQuery("SELECT CODESERVICE, LIBELLE FROM SERVICES");
+ 			ResultSet rsEmp = stmt.executeQuery("SELECT * FROM EMPLOYES");
+ 			
+ 			while(rsServ.next()) {
+ 				Service objServ = new Service(rsServ.getInt("CODESERVICE"), rsServ.getString("LIBELLE"));
+ 				alServ.add(objServ);
+ 			}
+ 			while(rsEmp.next()) {
+ 				Service objEmp = new Service(rsEmp.getInt("MATRICULE"), rsEmp.getString("NOM"),
+ 						rsEmp.getString("PRENOM"), rsEmp.getDouble("SALAIRE"),
+ 						rsEmp.getString("VILLE"));
+ 				alServ.add(objEmp);
+ 			}
+ 			rsServ.close();
+ 		} catch(SQLException e) { e.printStackTrace(); }
+ 		
+ 		finally {
+ 			try {
+ 				if(cnx != null) cnx.close();
+ 			} catch (SQLException e) {
+ 	 			e.printStackTrace();
+ 	 			System.out.println("Erreur de requete");
+ 	 		}
+ 		}
+ 		
+		return alServ;
+		
+	}
+}

@@ -1,0 +1,27 @@
+package site_cours.dao;
+
+import java.sql.Connection;
+import java.sql.DriverManager;
+import java.sql.SQLException;
+
+public class Maconnection {
+	
+	private String url = "jdbc:mysql://localhost:3306/gestionEmp?zeroDateTimeBehavior=CONVERT_TO_NULL&serverTimezone=UTC";
+	private String login = "root";
+	private String mpd = "root";
+	
+	
+	private static Connection connect;
+	
+	private Maconnection() {
+		try {
+			connect = DriverManager.getConnection("jdbc:mysql://localhost:3306/gestionEmp?zeroDateTimeBehavior=CONVERT_TO_NULL&serverTimezone=UTC", "root", "root");
+		} catch (SQLException e) {
+			e.printStackTrace();
+			System.out.println("Erreur de connexion à la base");
+		}
+	}
+	
+	
+
+}

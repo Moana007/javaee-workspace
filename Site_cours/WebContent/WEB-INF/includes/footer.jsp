@@ -1,0 +1,6 @@
+<footer>
+				<p>Footer é oui</p>
+			</footer>
+	 	</div>
+	</body>
+</html>

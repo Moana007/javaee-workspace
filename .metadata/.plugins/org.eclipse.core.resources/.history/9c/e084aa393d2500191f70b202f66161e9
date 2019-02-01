@@ -1,0 +1,96 @@
+package siteCours.servlets;
+
+import java.io.IOException;
+import javax.servlet.ServletException;
+import javax.servlet.annotation.WebServlet;
+import javax.servlet.http.Cookie;
+import javax.servlet.http.HttpServlet;
+import javax.servlet.http.HttpServletRequest;
+import javax.servlet.http.HttpServletResponse;
+import javax.servlet.http.HttpSession;
+
+import siteCours.dao.UserDAO;
+import siteCours.models.User;
+
+/**
+ * Servlet implementation class LoginServlet
+ */
+@WebServlet("/LoginServlet")
+public class LoginServlet extends HttpServlet {
+	private static final long serialVersionUID = 1L;
+    
+
+	/**
+	 * @see HttpServlet#doGet(HttpServletRequest request, HttpServletResponse response)
+	 */
+	protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
+		// TODO Auto-generated method stub
+		//response.getWriter().append("Served at: ").append(request.getContextPath());
+		
+		Cookie [] lesCookies =  request.getCookies();
+		if (lesCookies != null)
+		{
+			for(Cookie c : lesCookies)
+			{
+				if (c.getName().equals("cookPseudo"))
+				{
+					request.setAttribute("pseudo", c.getValue());
+					break;
+				}
+			}
+		}
+		
+		request.getRequestDispatcher("/WEB-INF/login.jsp")
+		.forward(request,  response);
+		
+	
+	}
+
+	/**
+	 * @see HttpServlet#doPost(HttpServletRequest request, HttpServletResponse response)
+	 */
+	protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
+		// TODO Auto-generated method stub
+		
+		System.out.println(request.getParameter("chkMemo"));
+		boolean trouver =false;
+		if (!request.getParameter("txtPseudo").isEmpty() && !request.getParameter("txtMdp").isEmpty())
+		{
+			User usr = new UserDAO().authenticate(request.getParameter("txtPseudo"), request.getParameter("txtMdp"));
+		
+			if(usr != null)
+			{
+				HttpSession session = request.getSession();
+				session.setAttribute("sessMail", usr.getMail());
+				session.setAttribute("sessInfo", "User N° " + usr.getId());
+				
+				if (request.getParameter("chkMemo") != null && 
+						request.getParameter("chkMemo").equals("memo"))
+				{
+					Cookie cook = new Cookie("cookPseudo",request.getParameter("txtPseudo") );
+					cook.setMaxAge(60*60*12);
+					response.addCookie(cook);
+
+				}
+				trouver=true;
+				if (trouver != false)
+					response.sendRedirect("./accueil");
+				
+			}
+			else
+			{
+				request.setAttribute("err", "Login et/ou Mot de Passe incorrect(s)");
+			}
+			
+		}
+		
+		else
+		{
+			request.setAttribute("err", "Login et/ou Mot de Passe manquant(s)");
+		}
+		
+		if (trouver == false)
+		doGet(request, response);
+	}
+
+}

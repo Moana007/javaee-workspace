@@ -1,0 +1,101 @@
+package site_cours.dao;
+
+import java.sql.Connection;
+import java.sql.DriverManager;
+import java.sql.PreparedStatement;
+import java.sql.ResultSet;
+import java.sql.SQLException;
+import java.sql.Statement;
+import java.util.ArrayList;
+
+import site_cours.models.Service;
+
+public class ServiceDAO {
+
+	public ArrayList<Service> getAllServices(){
+		
+		ArrayList<Service> alServ = new ArrayList<Service>();
+		
+		// -- Init driver --
+ 		// CLique droit sur le projet > Build Path > C://programmeFiles (x64) > Mysql > connector J8
+ 		try {
+			Class.forName("com.mysql.cj.jdbc.Driver");
+		} catch (ClassNotFoundException e) {
+			e.printStackTrace();
+			System.out.println("Erreur de chargement du pilote 'cj.jdbc'");
+		}
+ 		System.out.println("Chargement pilote OK");
+ 		
+ 		// -- Init/Recupere connexion --
+ 		Connection cnx = null;
+ 		try {
+			cnx = DriverManager.getConnection("jdbc:mysql://localhost:3306/gestionEmp?zeroDateTimeBehavior=CONVERT_TO_NULL&serverTimezone=UTC", "root", "root");
+		} catch (SQLException e) {
+			e.printStackTrace();
+			System.out.println("Erreur de connexion à la base");
+		}
+ 		System.out.println("Connexion OK\n");
+ 		
+ 		
+ 		try {
+ 			Statement stmt = cnx.createStatement();
+ 			ResultSet rsServ = stmt.executeQuery("SELECT CODESERVICE, LIBELLE FROM SERVICES");
+ 			
+ 			while(rsServ.next()) {
+ 				Service objServ = new Service(rsServ.getInt("CODESERVICE"), rsServ.getString("LIBELLE"));
+ 				alServ.add(objServ);
+ 			}
+ 			rsServ.close();
+ 		} catch(SQLException e) { e.printStackTrace(); }
+ 		
+ 		finally {
+ 			try {
+ 				if(cnx != null) cnx.close();
+ 			} catch (SQLException e) {
+ 	 			e.printStackTrace();
+ 	 			System.out.println("Erreur de requete");
+ 	 		}
+ 		}
+ 		
+		return alServ;
+	}
+	
+	public boolean create(Service objACreer) {
+		
+		// -- Init driver --
+ 		try {
+			Class.forName("com.mysql.cj.jdbc.Driver");
+		} catch (ClassNotFoundException e) {
+			e.printStackTrace();
+			System.out.println("Erreur de chargement du pilote 'cj.jdbc'");
+		}
+ 		System.out.println("Chargement pilote OK");
+ 		
+ 		// -- Init/Recupere connexion --
+ 		Connection cnx = null;
+ 		try {
+			cnx = DriverManager.getConnection("jdbc:mysql://localhost:3306/gestionEmp?zeroDateTimeBehavior=CONVERT_TO_NULL&serverTimezone=UTC", "root", "root");
+		} catch (SQLException e) {
+			e.printStackTrace();
+			System.out.println("Erreur de connexion à la base");
+		}
+ 		System.out.println("Connexion OK\n");
+ 		
+ 		
+ 		int nbAffectes = 0;
+ 		
+ 		String strSQL = "INSERT INTO SERVICE(LIBELLE) VALUES(?)";
+ 		
+ 		try {
+			PreparedStatement stmt = cnx.prepareStatement(strSQL);
+			stmt.setString(1, objACreer.getLibelle());
+			nbAffectes = stmt.executeUpdate();
+		} catch (SQLException e) { e.printStackTrace();	}
+ 		
+ 		
+ 		
+ 		
+ 		
+		return true;
+	}
+}

@@ -1,0 +1,88 @@
+package site_cours.servlets;
+
+import java.io.IOException;
+import java.util.ArrayList;
+
+import javax.servlet.ServletException;
+import javax.servlet.annotation.WebServlet;
+import javax.servlet.http.Cookie;
+import javax.servlet.http.HttpServlet;
+import javax.servlet.http.HttpServletRequest;
+import javax.servlet.http.HttpServletResponse;
+import javax.servlet.http.HttpSession;
+
+import site_cours.dao.UserDAO;
+import site_cours.models.User;
+
+/**
+ * Servlet implementation class LoginServlet
+ */
+@WebServlet("/LoginServlet")
+public class LoginServlet extends HttpServlet {
+	private static final long serialVersionUID = 1L;
+       
+	/**
+	 * @see HttpServlet#doGet(HttpServletRequest request, HttpServletResponse response)
+	 */
+	protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
+		// TODO Auto-generated method stub
+		//response.getWriter().append("Served at: ").append(request.getContextPath());
+		
+		Cookie [] lesCookies = request.getCookies();
+		if(lesCookies != null) {
+			for (Cookie c : lesCookies) {
+				if(c.getName().equals("cookPseudo")) {
+					request.setAttribute("pseudo", c.getValue());
+				}
+			}
+		}
+			
+		if(request.getSession().getAttribute("sessMail") != null) {
+			response.sendRedirect(request.getContextPath() + "/accueil");
+		}else {
+			request.getRequestDispatcher("/WEB-INF/login.jsp").forward(request, response);
+		}
+	}
+
+	/**
+	 * @see HttpServlet#doPost(HttpServletRequest request, HttpServletResponse response)
+	 */
+	protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
+		
+		String pseudo = request.getParameter("txtPseudo");
+		String mdp = request.getParameter("txtMdp");
+		String chk = request.getParameter("chkMemo");
+		// --- destroy session ---
+		//request.getSession().invalidate()
+		//request.getSession().removeAttribute("sessInfo");
+		
+		if(pseudo.isEmpty() || mdp.isEmpty()) {
+			request.setAttribute("message", "<div class=\"alert alert-danger\" role=\"alert\">Erreurs : Veuillez renseigner tous les champs</div>");
+		} else  {
+			
+			UserDAO userDao = new UserDAO();
+			ArrayList<User> users = userDao.getAll();
+			String mail = "";
+			for(User u : users) {
+				if(pseudo.equals(u.getLogin()) && mdp.equals(u.getMdp()))
+					mail = u.getMail();
+					HttpSession session = request.getSession();
+					session.setAttribute("sessInfo", u.getLogin() );
+					session.setAttribute("sessMail", u.getMail());
+			}
+			if(mail.equals("")) {
+				request.setAttribute("message", "<div class=\"alert alert-danger\" role=\"alert\">Login/Mot de passe ne correspondent pas. Retry.</div>");
+			}
+		}
+		
+		if(chk != null) {
+			if(chk.equals("memo")) {
+				Cookie cook = new Cookie("cookPseudo", pseudo);
+				cook.setMaxAge(60*60*12);
+				response.addCookie(cook);
+			}
+		}	
+		doGet(request, response);
+	}
+
+}

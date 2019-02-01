@@ -1,0 +1,74 @@
+package site_cours.dao;
+
+import java.sql.Connection;
+import java.sql.DriverManager;
+import java.sql.ResultSet;
+import java.sql.SQLException;
+import java.sql.Statement;
+import java.util.ArrayList;
+
+import site_cours.models.Employes;
+
+public class EmployesDAO {
+	
+	public int matricule;
+	
+	public void setMatricule(int mat) {
+		this.matricule = mat;
+	}
+	public int getMatricule() {
+		return matricule;
+	}
+	public ArrayList<Employes> getAllServices(int id){
+		
+		ArrayList<Employes> alEmp = new ArrayList<Employes>();
+		
+		// -- Init driver --
+ 		// CLique droit sur le projet > Build Path > C://programmeFiles (x64) > Mysql > connector J8
+ 		try {
+			Class.forName("com.mysql.cj.jdbc.Driver");
+		} catch (ClassNotFoundException e) {
+			e.printStackTrace();
+			System.out.println("Erreur de chargement du pilote 'cj.jdbc'");
+		}
+ 		System.out.println("Chargement pilote OK");
+ 		
+ 		// -- Init/Recupere connexion --
+ 		Connection cnx = null;
+ 		try {
+			cnx = DriverManager.getConnection("jdbc:mysql://localhost:3306/gestionEmp?zeroDateTimeBehavior=CONVERT_TO_NULL&serverTimezone=UTC", "root", "root");
+		} catch (SQLException e) {
+			e.printStackTrace();
+			System.out.println("Erreur de connexion à la base");
+		}
+ 		System.out.println("Connexion OK\n");
+ 		
+ 		
+ 		try {
+ 			Statement stmt = cnx.createStatement();
+ 			System.out.println("=>"+this.getMatricule());
+ 			ResultSet rsEmp = stmt.executeQuery("SELECT * FROM EMPLOYES");
+ 			
+ 			while(rsEmp.next()) {
+ 				Employes objEmp = new Employes(rsEmp.getInt("ID_EMP"), rsEmp.getInt("CODESERVICE"), rsEmp.getString("NOM"),
+ 						rsEmp.getString("PRENOM"), rsEmp.getDouble("SALAIRE"),
+ 						rsEmp.getString("VILLE"));
+ 				alEmp.add(objEmp);
+ 			}
+ 			rsEmp.close();
+ 		} catch(SQLException e) { e.printStackTrace(); }
+ 		
+ 		finally {
+ 			try {
+ 				if(cnx != null) cnx.close();
+ 			} catch (SQLException e) {
+ 	 			e.printStackTrace();
+ 	 			System.out.println("Erreur de requete");
+ 	 		}
+ 		}
+ 		
+		return alEmp;
+		
+	}
+
+}

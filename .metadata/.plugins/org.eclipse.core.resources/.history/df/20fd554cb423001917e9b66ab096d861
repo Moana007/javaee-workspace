@@ -1,0 +1,35 @@
+<%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
+<%@page language="java" pageEncoding="ISO-8859-1"%>
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+	<meta charset="UTF-8">
+	<title>Site cours (AddService)</title>
+	<link rel="stylesheet" type="text/css" href="./assets/css/reset.css">
+	<link rel="stylesheet" type="text/css" href="./assets/css/gabaritSemantique.css">
+	<link  rel="stylesheet" type="text/css" href="./assets/css/bootstrap-4.2.1/css/bootstrap.min.css">
+	<script type="text/javascript" src="./assets/boostrap-4.2.1/js/boostrap.min.js"></script>
+</head>
+<body>
+	<div id="global">
+	<!--  -->
+		<%@include file = "includes/header.html" %>
+		
+		<section>
+			<%@include file = "includes/menu.jsp" %>
+			
+			<article id="contenu">
+				<div>
+				
+					<form action=""></form>
+				
+				
+				</div>
+			</article>
+		</section>
+		
+		<%@include file = "includes/footer.html" %>
+<!--  -->
+	</div>
+</body>
+</html>

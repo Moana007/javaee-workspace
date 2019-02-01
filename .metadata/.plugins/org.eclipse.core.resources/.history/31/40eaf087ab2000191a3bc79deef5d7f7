@@ -1,0 +1,18 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+	<meta charset="UTF-8">
+	<title>Site cours (index)</title>
+	<link rel="stylesheet" type="text/css" href="./assets/css/reset.css">
+	<link rel="stylesheet" type="text/css" href="./assets/css/gabaritSemantique.css">
+</head>
+<body>
+	<div id="global">
+	
+	<!-- CALL : header -->
+	<!-- CALL : MENU -->
+	<!-- CALL : footer -->
+	
+	</div>
+</body>
+</html>

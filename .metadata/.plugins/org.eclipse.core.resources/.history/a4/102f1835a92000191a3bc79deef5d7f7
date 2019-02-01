@@ -1,0 +1,49 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+<meta charset="UTF-8">
+<title>Site cours (index)</title>
+</head>
+<body>
+
+	<img src="logo.png">
+	<h1>Accueil</h1>
+
+	<ul>
+		<li><a href="">Accueil</a></li>
+		<li><a href="">Item 1</a></li>
+		<li><a href="">Item 2</a></li>
+		<li><a href="">Item 3</a></li>
+		<li><a href="">Contact</a></li>
+	</ul>
+
+<h1>Sujet de la page</h1>
+<p>Lorem ipsum dolor sit amet, consectetuer adipiscing elit. Sed non risus. Suspendisse lectus tortor, dignissim sit amet, 
+adipiscing nec, ultricies sed, dolor. Cras elementum ultrices diam.Lorem ipsum dolor sit amet, consectetuer adipiscing elit.</p>
+
+<h2>Article 1</h2>
+<p>Lorem ipsum dolor sit amet, consectetuer adipiscing elit. Sed non risus. Suspendisse lectus tortor, dignissim sit amet, 
+adipiscing nec, ultricies sed, dolor. Cras elementum ultrices diam.Lorem ipsum dolor sit amet, consectetuer adipiscing elit.</p>
+
+<h2>Article 2</h2>
+<p>Lorem ipsum dolor sit amet, consectetuer adipiscing elit. Sed non risus. Suspendisse lectus tortor, dignissim sit amet,
+ adipiscing nec, ultricies sed, dolor. Cras elementum ultrices diam.Lorem ipsum dolor sit amet, consectetuer adipiscing elit.</p>
+
+<h3>Archives</h3>
+<ul>
+  <li><a href="">Août 201x</a></li>
+  <li><a href="">Juillet 201x</a></li>
+  <li><a href="">Juin 201x</a></li>
+  <li><a href="">Mai 201x</a></li>
+</ul>
+
+
+<a href="">Accueil</a>
+<a href="">Plan</a>
+<a href="">Contact</a>
+<a href="">CGU</a>
+
+<p>Copyright &copy; 201x </p>
+
+</body>
+</html>

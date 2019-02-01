@@ -1,0 +1,66 @@
+package site_cours.dao;
+
+import java.sql.Connection;
+import java.sql.DriverManager;
+import java.sql.ResultSet;
+import java.sql.SQLException;
+import java.sql.Statement;
+import java.util.ArrayList;
+
+import site_cours.models.Service;
+
+public class ServiceDAO {
+
+	public ArrayList<Service> getAllServices(){
+		
+		// -- Init driver --
+ 		// CLique droit sur le projet > Build Path > Add external Archives > C://programmeFiles (x64) > Mysql > connector J8
+ 		try {
+			Class.forName("com.mysql.cj.jdbc.Driver");
+		} catch (ClassNotFoundException e) {
+			e.printStackTrace();
+			System.out.println("Erreur de chargement du pilote 'cj.jdbc'");
+		}
+ 		System.out.println("Chargement pilote OK");
+ 		
+ 		// -- Init/Recupere connexion --
+ 		Connection cnx = null;
+ 		try {
+			cnx = DriverManager.getConnection("jdbc:mysql://localhost:3306/dbgestion?zeroDateTimeBehavior=CONVERT_TO_NULL&serverTimezone=UTC", "root", "root");
+		} catch (SQLException e) {
+			e.printStackTrace();
+			System.out.println("Erreur de connexion à la base");
+		}
+ 		System.out.println("Connexion OK\n");
+ 		
+ 		
+ 		
+ 		try {
+ 			Statement stmt = cnx.createStatement();
+ 			ResultSet rsEmp = stmt.executeQuery("SELECT nom, prenom, salaire, matricule, mail FROM employes");
+ 			
+ 			//rsEmp.last();
+ 			//System.out.println("Nb row : "+ rsEmp.getRow());
+ 			
+ 			while(rsEmp.next()) { // regarde l'element suivant et renvoi TRUE/FALSE
+ 				System.out.println("Nom: "+ rsEmp.getString(1)
+ 								+", prenom : "+ rsEmp.getString("prenom")
+ 								+", Salaire : "+ rsEmp.getInt("salaire")
+ 								+", Matricule : "+ rsEmp.getInt("matricule")
+ 								+", Mail : "+ rsEmp.getString("mail")
+ 				);
+ 				
+ 				if(rsEmp.isLast()) {
+ 					int nbEmp = rsEmp.getRow();
+ 		 			System.out.println("Nb employe(row) : "+ nbEmp);
+ 				}
+ 					
+ 			}	
+ 			rsEmp.close();
+ 			//cnx.close();
+ 		} catch(SQLException e) { e.printStackTrace(); }
+ 		
+		return null;
+		
+	}
+}

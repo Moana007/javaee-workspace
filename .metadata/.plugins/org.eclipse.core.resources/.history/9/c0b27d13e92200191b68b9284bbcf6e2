@@ -1,0 +1,22 @@
+<%@ import ="Site_cours.dao.ServiceDAO" %>
+<%@ import ="Site_cours.models.Service" %>
+<%@ page language="java" contentType="text/html; charset=UTF-8"
+    pageEncoding="UTF-8"%>
+<aside>
+	<nav>
+		<ul><!-- 
+	 -->		<li><a href="#">BTN_1</a></li>
+
+
+	<%
+		ServiceDAO sevDao = new ServiceDAO();
+		for(Service service :servDAO.getAllServices()){
+			
+		}
+	%>
+		</ul>
+	</nav>
+</aside>
+
+        
+      

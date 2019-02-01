@@ -1,0 +1,13 @@
+<!DOCTYPE html>
+<html>
+<head>
+<meta charset="UTF-8">
+<title>Page test.jsp</title>
+</head>
+<body>
+
+<h1>page test.jsp</h1>
+<p>Resultat : ${4*3}</p>
+<p>Chaine : ${chaine}</p>
+</body>
+</html>

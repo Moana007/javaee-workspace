@@ -1,0 +1,11 @@
+package site_cours.dao;
+
+import java.util.ArrayList;
+
+public abstract class DAO<T> {
+
+	public abstract ArrayList<T> getAll(){
+		
+	
+	}
+}

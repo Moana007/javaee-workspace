@@ -1,0 +1,24 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+	<meta charset="UTF-8">
+	<title>Site cours (index)</title>
+	<link rel="stylesheet" type="text/css" href="./assets/css/reset.css">
+	<link rel="stylesheet" type="text/css" href="./assets/css/gabaritSemantique.css">
+</head>
+<body>
+	<div id="global">
+	
+	<!-- TODO:
+		1) Créer une servlet (package)
+		2) web.xml : spécifier le chemin de la servlet
+	
+	 -->
+	
+	<!-- CALL : header -->
+	<!-- CALL : menu -->
+	<!-- CALL : footer -->
+	
+	</div>
+</body>
+</html>

@@ -1,0 +1,24 @@
+<?xml version="1.0" encoding="UTF-8" standalone="no"?>
+<qualifiedTypeNameHistroy>
+<fullyQualifiedTypeName name="javax.servlet.RequestDispatcher"/>
+<fullyQualifiedTypeName name="com.sun.xml.internal.ws.wsdl.writer.document.Service"/>
+<fullyQualifiedTypeName name="java.sql.Statement"/>
+<fullyQualifiedTypeName name="java.sql.ResultSet"/>
+<fullyQualifiedTypeName name="java.sql.SQLException"/>
+<fullyQualifiedTypeName name="java.sql.DriverManager"/>
+<fullyQualifiedTypeName name="site_cours.models.Service"/>
+<fullyQualifiedTypeName name="site_cours.dao.ServiceDAO"/>
+<fullyQualifiedTypeName name="site_cours.models.Employes"/>
+<fullyQualifiedTypeName name="site_cours.servlets.AddEmployeServlet"/>
+<fullyQualifiedTypeName name="site_cours.dao.EmployesDAO"/>
+<fullyQualifiedTypeName name="java.util.regex.Matcher"/>
+<fullyQualifiedTypeName name="sun.misc.Perf.GetPerfAction"/>
+<fullyQualifiedTypeName name="javax.servlet.http.HttpSession"/>
+<fullyQualifiedTypeName name="javax.servlet.http.Cookie"/>
+<fullyQualifiedTypeName name="java.util.ArrayList"/>
+<fullyQualifiedTypeName name="java.sql.Connection"/>
+<fullyQualifiedTypeName name="site_cours.models.User"/>
+<fullyQualifiedTypeName name="site_cours.dao.UserDAO"/>
+<fullyQualifiedTypeName name="java.sql.PreparedStatement"/>
+<fullyQualifiedTypeName name="site_cours.dao.Maconnection"/>
+</qualifiedTypeNameHistroy>

@@ -1,0 +1,68 @@
+package site_cours.servlets;
+
+import java.io.IOException;
+import java.util.ArrayList;
+
+import javax.servlet.ServletException;
+import javax.servlet.annotation.WebServlet;
+import javax.servlet.http.HttpServlet;
+import javax.servlet.http.HttpServletRequest;
+import javax.servlet.http.HttpServletResponse;
+
+import site_cours.dao.UserDAO;
+import site_cours.models.Employes;
+import site_cours.models.User;
+
+/**
+ * Servlet implementation class TestServlets
+ */
+@WebServlet("/TestServlets")
+public class TestServlets extends HttpServlet {
+	private static final long serialVersionUID = 1L;
+       
+  
+	/**
+	 * @see HttpServlet#doGet(HttpServletRequest request, HttpServletResponse response)
+	 */
+	protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
+		// TODO Auto-generated method stub
+		//response.getWriter().append("Served at: ").append(request.getContextPath());
+		
+		UserDAO userDao = new UserDAO();
+		ArrayList<User> users = userDao.getAll();
+		for(User u : users) {
+			System.out.println(u.getLogin());
+		}
+		
+		
+		
+		
+		request.setAttribute("chaine", "totoName");
+		request.setAttribute("chaine2", "");
+		int [] tInts = new int[] {10,30,50,75,100};
+		request.setAttribute("ints", tInts);
+		
+		Employes e = new Employes( 0, "Dupond", "Paul", 2500, "Paris");
+		request.setAttribute("emp", e);
+		
+		ArrayList<Employes> alEmp = new ArrayList<Employes>();
+		alEmp.add(new Employes( 0, "Dupond", "paul", 1500, "Paris" ));
+		alEmp.add(new Employes( 0, "Durand", "paul", 1500, "Paris" ));
+		alEmp.add(new Employes( 0, "Dupuis", "paul", 1500, "Paris" ));
+		alEmp.add(new Employes( 0, "Ducon", "paul", 1500, "Paris" ));
+		alEmp.add(new Employes( 0, "Dubosc", "paul", 1500, "Paris" ));
+		
+		request.setAttribute("mesEmps", alEmp);
+		
+		request.getRequestDispatcher("/WEB-INF/test.jsp").forward(request, response);
+	}
+
+	/**
+	 * @see HttpServlet#doPost(HttpServletRequest request, HttpServletResponse response)
+	 */
+	protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
+		// TODO Auto-generated method stub
+		doGet(request, response);
+	}
+
+}

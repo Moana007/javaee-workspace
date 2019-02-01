@@ -1,0 +1,57 @@
+<%@page import ="site_cours.dao.EmployesDAO" %>
+<%@page import ="site_cours.models.Employes" %>
+<%@page language="java" pageEncoding="ISO-8859-1"%>
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+	<meta charset="UTF-8">
+	<title>Site cours (Accueil)</title>
+	<link rel="stylesheet" type="text/css" href="./assets/css/reset.css">
+	<link rel="stylesheet" type="text/css" href="./assets/css/gabaritSemantique.css">
+	<link  rel="stylesheet" type="text/css" href="./assets/css/bootstrap-4.2.1/css/bootstrap.min.css">
+	<script type="text/javascript" href="./assets/boostrap-4.2.1/js/boostrap.min.js"></script>
+</head>
+<body>
+	<div id="global">
+	
+		<%@include file = "includes/header.html" %>
+		
+		<section>
+			<%@include file = "includes/menu.jsp" %>
+			
+			<article id="contenu">
+				<div>
+				<h1>Catgeroie : <% out.print(request.getAttribute("maCategorie")) %></h1>
+					<table id="table_accueil" class="table table-striped">
+						<thead>	
+							<tr>
+								<th scope="col">Mat.</th>
+								<th scope="col">Nom</th>
+								<th scope="col">Prenom</th>
+								<th scope="col">Salaire</th>
+								<th scope="col">Ville</th>
+							</tr>
+						</thead>
+						<tbody>
+						<%
+							EmployesDAO empDao = new EmployesDAO();
+							for(Employes emp : empDao.getAllServices()){
+								out.print("<tr><th scope='row'>"+emp.getMatricule()+"</td>"
+										+"<td>"+emp.getNom()+"</td>"
+										+"<td>"+emp.getPrenom()+"</td>"
+										+"<td>"+emp.getSalaire()+"</td>"
+										+"<td>"+emp.getVille()+"</td></tr>"
+								);
+							}
+						%>
+						</tbody>
+					</table>
+				</div>
+			</article>
+		</section>
+		
+		<%@include file = "includes/footer.html" %>
+
+	</div>
+</body>
+</html>

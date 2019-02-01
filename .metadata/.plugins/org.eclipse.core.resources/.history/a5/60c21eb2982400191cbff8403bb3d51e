@@ -1,0 +1,9 @@
+package site_cours.models;
+
+public class user {
+
+	public String nom;
+	public String prenom;
+	public String ;
+	
+}

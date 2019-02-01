@@ -1,0 +1,11 @@
+package site_cours.models;
+
+public class Employes {
+	
+	private int matricule;
+	private String nom;
+	private String prenom;
+	private double salaire;
+	private String ville;
+
+}

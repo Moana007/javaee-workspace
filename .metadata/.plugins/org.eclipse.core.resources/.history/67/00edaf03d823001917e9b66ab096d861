@@ -1,0 +1,65 @@
+<%@taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
+<%@ page language="java" pageEncoding="UTF-8"%>
+<%@include file = "includes/header.jsp" %>
+
+<section>
+	<%@include file = "includes/menu.jsp" %>
+	
+	<article id="contenu">
+	<div id="addEmploye">
+		<h1>Ajouter un employé</h1>
+		<form action="" name="" method="POST">
+			<div class="input-group mb-3">
+				<div class="input-group-prepend">
+					<span class="input-group-text" id="basic-addon1">Nom</span>
+				</div>
+				<input type="text" class="form-control" name="txtNom" placeholder="Votre nom">
+			</div>
+			<div class="input-group mb-3">
+				<div class="input-group-prepend">
+					<span class="input-group-text" id="basic-addon1">Prenom</span>
+				</div>
+				<input type="text" class="form-control" name="txtPre" placeholder="Votre prenom">
+			</div>
+			<div class="input-group mb-3">
+				<div class="input-group-prepend">
+					<span class="input-group-text">Salaire</span>
+				</div>
+				<input type="text" name="txtSal" placeholder="Votre salaire" class="form-control">
+				<div class="input-group-append">
+					<span class="input-group-text" style="width:35px;">€</span>
+				</div>
+			</div>
+			<div class="form-check form-check-inline">
+				<div class="input-group-text" style="margin-right:15px;">Ville</div> 
+				<input class="form-check-input" id="v_paris" name="radVille" type="radio" name="inlineRadioOptions" value="paris" checked>
+				<label class="form-check-label" for="v_paris">Paris</label>
+			</div>
+			<div class="form-check form-check-inline">
+				<input class="form-check-input" id="v_creteil" name="radVille" type="radio" name="inlineRadioOptions" value="creteil">
+				<label class="form-check-label" for="v_creteil">Créteil</label>
+			</div>
+			<div class="form-check form-check-inline">
+				<input class="form-check-input" id="v_versaille" name="radVille" type="radio" name="inlineRadioOptions"  value="versaille">
+				<label class="form-check-label" for="v_versaille">Versaille</label>
+			</div>
+			
+			<div class="form-group" style="margin-top:15px;">
+					<div class="input-group-text" style="display:inline-block;">Service</div>
+				<select class="form-control" style="width:85%;display:inline-block;" name="selectService" id="selectService">
+					<c:forEach items="${ allServices }" var="serv">
+						<option value="<c:out value="${ serv.codeservice }"/>"><c:out value="${ serv.libelle }"/></option>
+					</c:forEach>	
+				</select>
+			</div>
+			
+			<p><button class="btn btn-primary" type="submit" name="btnAjouter" id="btnAjouter">Ajouter</button></p>
+		</form>
+			
+		<p>${message}</p>
+		
+	</div>
+	</article>
+</section>
+
+<%@include file = "includes/footer.html" %>
